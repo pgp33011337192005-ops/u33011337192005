@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Post • My Retro Blog</title>
+
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/code.css" />
+
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/highlight.js@11.10.0/lib/common.min.js"></script>
+</head>
+
+<body>
+  <div class="frame">
+    <header class="banner">
+      <div class="badge">✦ Blog Post ✦</div>
+    </header>
+
+    <nav class="nav">
+      <a class="nav-item" href="index.html"><img class="nav-ico" src="static/icons/home.ico" alt=""> Home</a>
+      <a class="nav-item" href="about.html"><img class="nav-ico" src="static/icons/about.ico" alt=""> About</a>
+      <a class="nav-item" href="blog.html"><img class="nav-ico" src="static/icons/blog.ico" alt=""> Blog</a>
+      <div class="nav-spacer"></div>
+      <button class="tiny-btn" id="toggleMusicBtn" type="button">Toggle Music</button>
+    </nav>
+
+    <main class="content">
+      <section class="box">
+        <div class="hd">
+          <span class="title" id="postTitle">Loading…</span>
+          <span class="tagline" id="postMeta"></span>
+        </div>
+
+        <div class="bd">
+          <div id="postBody" class="markdown-body"></div>
+        </div>
+      </section>
+
+      <aside class="sidebar">
+        <section class="box widget">
+          <div class="hd">Back</div>
+          <div class="bd small">
+            <a class="link" href="blog.html">← All posts</a>
+          </div>
+        </section>
+
+        <section class="box widget">
+          <div class="hd">Visitor counter</div>
+          <div class="bd small">
+            <div class="counter">
+              <div class="counter-label">VISITORS:</div>
+              <div class="digits" id="visitorDigits">000000</div>
+            </div>
+          </div>
+        </section>
+      </aside>
+    </main>
+
+    <footer class="footer">
+      <span>© <span id="year"></span> My Retro Blog</span>
+      <span class="footer-right">Made with pure HTML/CSS/JS</span>
+    </footer>
+  </div>
+
+  <audio id="bgMusic" loop>
+    <source src="/static/audio/nirvana.mp3" type="audio/mpeg" />
+  </audio>
+
+  <script src="js/app.js"></script>
+  <script src="js/blog.js"></script>
+</body>
+</html>
+1

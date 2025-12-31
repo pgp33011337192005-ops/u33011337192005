@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Thoughts</title>
+
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/code.css" />
+
+  <!-- Markdown + code highlighting (needed for blog.js + future post rendering) -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/highlight.js@11.10.0/lib/common.min.js"></script>
+</head>
+
+<body>
+  <div class="frame">
+    <header class="banner">
+      <div class="badge">Only bulllet pr00f thoughts</div>
+    </header>
+
+    <nav class="nav">
+      <a class="nav-item" href="index.html">
+        <img class="nav-ico" src="static/icons/home.ico" alt="" /> Home
+      </a>
+      <a class="nav-item" href="about.html">
+        <img class="nav-ico" src="static/icons/about.ico" alt="" /> About
+      </a>
+      <a class="nav-item" href="blog.html">
+        <img class="nav-ico" src="static/icons/blog.ico" alt="" /> Blog
+      </a>
+
+      <div class="nav-spacer"></div>
+      <button class="tiny-btn" id="toggleMusicBtn" type="button">Toggle Music</button>
+    </nav>
+
+    <main class="content">
+      <!-- LEFT: Blog list -->
+      <section class="box">
+        <div class="hd">
+          <span class="title">All Posts</span>
+          <span class="tagline">— latest first</span>
+        </div>
+
+        <!-- blog.js will populate this from static/posts.json -->
+        <div class="bd" id="blogList">
+          <p>Loading posts…</p>
+        </div>
+      </section>
+
+      <!-- RIGHT: Sidebar -->
+      <aside class="sidebar">
+        <section class="box widget">
+          <div class="hd">Filters</div>
+          <div class="bd small">
+            <input class="search" id="searchInput" placeholder="Search posts..." />
+            <div class="badges" style="margin-top:10px;">
+              <button class="pill-btn" data-tag="all" type="button">All</button>
+              <button class="pill-btn" data-tag="personal" type="button">Personal</button>
+              <button class="pill-btn" data-tag="design" type="button">Design</button>
+              <button class="pill-btn" data-tag="projects" type="button">Projects</button>
+            </div>
+          </div>
+        </section>
+
+        
+          
+          <div class="bd small">
+            <img class="gif" src="static/gifs/bonzi.gif" alt="bonzi gif">
+            <p class="dim">Bonzi approves your blog.</p>
+          </div>
+
+        <section class="box widget">
+          <div class="hd">Visitor counter</div>
+          <div class="bd small">
+            <div class="counter">
+              <div class="counter-label">VISITORS:</div>
+              <div class="digits" id="visitorDigits">000000</div>
+            </div>
+          </div>
+        </section>
+      </aside>
+    </main>
+
+    <footer class="footer">
+      <span>© <span id="year"></span> My Retro Blog</span>
+      <span class="footer-right">Made with pure HTML/CSS/JS</span>
+    </footer>
+  </div>
+
+  <audio id="bgMusic" loop>
+    <source src="/static/audio/hello-world.mp3" type="audio/mpeg" />
+  </audio>
+
+  <script src="js/app.js"></script>
+  <script src="js/blog.js"></script>
+</body>
+</html>

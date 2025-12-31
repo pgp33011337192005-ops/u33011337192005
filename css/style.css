@@ -1,0 +1,846 @@
+/* =========================
+   Retro Web 2.0 Theme (Full)
+   ========================= */
+
+/* 1) Theme variables */
+:root{
+  --bg:#018281;
+
+  --panel:#d7d7d7;
+  --panel2:#cfcfcf;
+  --ink:#1b1b1b;
+
+  --blue1:#0f4b86;
+  --blue2:#0b2f57;
+
+  --accent:#00e5ff;
+  --accent2:#ff3b3b;
+
+  --border:#1a1a1a;
+  --shadow: 0 10px 30px rgba(0,0,0,.55);
+
+  /* Retro font (2nd image vibe) */
+  --font-body: "Lucida Console","Courier New",Courier,monospace;
+  --font-ui: Tahoma,Verdana,Arial,sans-serif;
+
+  /* Icon sizing (FIX for huge icons) */
+  --nav-ico-size: 18px;       /* change to 16px if you want smaller */
+  --nav-gap: 18px;
+
+  /* Bevel colors */
+  --bevel-light: rgba(255,255,255,.55);
+  --bevel-dark: rgba(0,0,0,.55);
+}
+
+/* 2) Reset */
+*{ box-sizing:border-box; }
+html, body{ height:100%; }
+
+body{
+  margin:0;
+  color:var(--ink);
+
+  /* Retro background */
+  background:
+    radial-gradient(1200px 600px at 50% -20%, #2a2a3a 0%, rgba(0,0,0,0) 60%),
+    linear-gradient(180deg, rgba(0,0,0,.10), rgba(0,0,0,.30)),
+    var(--bg);
+  background-repeat: no-repeat;        /* ⬅ stops repeating */
+  background-attachment: fixed;        /* ⬅ classic desktop feel */
+  background-size: cover; 
+
+  /* Font like 2nd image */
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.45;
+
+  /* Subtle “CRT scanlines” */
+  position: relative;
+  font-weight: 500;
+  -webkit-font-smoothing: none;
+  -moz-osx-font-smoothing: auto;
+  text-rendering: optimizeSpeed;
+}
+
+body::before{
+  content:"";
+  position: fixed;
+  inset: 0;
+  pointer-events:none;
+  background:
+    repeating-linear-gradient(
+      to bottom,
+      rgba(255,255,255,0.035),
+      rgba(255,255,255,0.035) 1px,
+      rgba(0,0,0,0) 3px,
+      rgba(0,0,0,0) 5px
+    );
+  opacity: .35;
+  mix-blend-mode: overlay;
+}
+
+/* 3) Site frame */
+.frame{
+  width:1100px;
+  max-width:calc(100% - 24px);
+  margin:20px auto;
+
+  border:3px solid #111;
+  border-radius:6px;
+  background:#111;
+  box-shadow: var(--shadow);
+  overflow:hidden;
+}
+
+/* 4) Banner */
+.banner{
+  position: relative;
+  width: 100%;
+
+  /* 16:9 aspect ratio for 1920x1080 images */
+  aspect-ratio: 16 / 9;
+
+  background:
+    linear-gradient(180deg, rgba(0,0,0,.15), rgba(0,0,0,.65)),
+    url("../static/images/dream.jpeg");
+
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+
+  border-bottom: 2px solid #0c0c0c;
+  overflow: hidden;
+}
+
+
+.banner::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  box-shadow:
+    inset 0 0 0 2px rgba(255,255,255,.12),
+    inset 0 -30px 60px rgba(0,0,0,.35);
+  pointer-events:none;
+}
+
+.badge{
+  position:absolute;
+  left:14px;
+  bottom:14px;
+
+  padding:10px 12px;
+  border:2px solid rgba(255,255,255,.25);
+  background: rgba(0,0,0,.35);
+
+  color:#e9faff;
+  text-shadow: 0 2px 0 rgba(0,0,0,.75);
+  font-weight:bold;
+  border-radius:6px;
+
+  font-family: var(--font-ui);
+}
+
+/* 5) Nav */
+.nav{
+  display:flex;
+  gap: var(--nav-gap);
+  align-items:center;
+  padding:10px 14px;
+
+  background: linear-gradient(180deg, var(--blue1), var(--blue2));
+  border-top:1px solid rgba(255,255,255,.18);
+  border-bottom:3px solid #071a30;
+
+  font-family: var(--font-ui);
+  font-size:14px;
+}
+
+.nav-spacer{ flex:1; }
+
+.nav a{
+  color:#aef6ff;
+  text-decoration:none;
+  text-shadow: 0 1px 0 rgba(0,0,0,.65);
+  padding:5px 8px;
+  border-radius:4px;
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+}
+
+.nav a:hover{
+  background: rgba(0,0,0,.22);
+  outline:1px solid rgba(255,255,255,.18);
+}
+
+/* Active */
+.nav a.active{
+  background: rgba(0,0,0,.28);
+  outline:1px solid rgba(255,255,255,.22);
+}
+
+/* ICON SIZE FIX (prevents huge icons) */
+.nav-ico{
+  width: var(--nav-ico-size) !important;
+  height: var(--nav-ico-size) !important;
+  flex: 0 0 var(--nav-ico-size);
+  display:inline-block;
+  image-rendering: pixelated;
+  /* On some browsers .ico needs this to not blur weirdly */
+  filter: contrast(1.05) saturate(1.05);
+}
+
+/* Button (retro) */
+.tiny-btn{
+  font-family: var(--font-ui);
+  font-size: 12px;
+  padding:6px 10px;
+
+  border:2px solid #071a30;
+  color:#eaffff;
+  background: linear-gradient(180deg, #1a6fbf, #0b3c6b);
+  border-radius:4px;
+  cursor:pointer;
+
+  box-shadow:
+    inset 1px 1px 0 rgba(255,255,255,.22),
+    inset -1px -1px 0 rgba(0,0,0,.35);
+}
+
+.tiny-btn:active{
+  transform: translateY(1px);
+  box-shadow:
+    inset -1px -1px 0 rgba(255,255,255,.18),
+    inset 1px 1px 0 rgba(0,0,0,.45);
+}
+
+/* 6) Main content grid */
+.content{
+  background: linear-gradient(180deg, var(--panel), var(--panel2));
+  padding:16px;
+
+  display:grid;
+  grid-template-columns: 1fr 290px;
+  gap:16px;
+}
+
+/* 7) Retro “beveled” boxes */
+.box{
+  border:2px solid var(--border);
+  background:#dcdcdc;
+  border-radius:4px;
+  overflow:hidden;
+
+  /* Bevel effect like old UI panels */
+  box-shadow:
+    inset 1px 1px 0 var(--bevel-light),
+    inset -1px -1px 0 var(--bevel-dark);
+}
+
+/* Header bar */
+.hd{
+  background: linear-gradient(180deg, #bfbfbf, #a9a9a9);
+  border-bottom:2px solid #222;
+
+  padding:10px 12px;
+  font-weight:bold;
+
+  display:flex;
+  align-items:center;
+  gap:10px;
+
+  font-family: var(--font-ui);
+}
+
+/* Title styling */
+.title{
+  font-size: 22px;
+  color: #b00000;
+  text-shadow: 0 1px 0 rgba(255,255,255,.35);
+  font-family: var(--font-ui);
+}
+
+.tagline{
+  font-size: 12px;
+  font-weight: normal;
+  color:#333;
+  font-family: var(--font-ui);
+}
+
+.bd{ padding:14px 14px 16px; }
+.small{ font-size: 13px; }
+
+.intro{
+  margin-top:0;
+  line-height:1.5;
+}
+
+h2, h3{
+  font-family: var(--font-ui);
+  margin: 14px 0 8px;
+}
+
+.bullets{ margin:0 0 10px 18px; }
+
+.sep{
+  border:none;
+  border-top:1px solid rgba(0,0,0,.25);
+  margin:16px 0;
+}
+
+/* 8) Retro callout */
+.callout{
+  margin: 14px 0;
+  padding: 12px;
+
+  background: linear-gradient(180deg, #efefef, #d6d6d6);
+  border: 2px solid #222;
+  border-radius: 6px;
+
+  display:flex;
+  gap:12px;
+  align-items:center;
+  justify-content:space-between;
+
+  box-shadow:
+    inset 1px 1px 0 rgba(255,255,255,.45),
+    inset -1px -1px 0 rgba(0,0,0,.35);
+}
+
+.callout-text{
+  font-family: var(--font-body);
+}
+
+.big-button{
+  display:inline-block;
+  padding:10px 14px;
+
+  background: linear-gradient(180deg, #7b7bff, #4d4dff);
+  color:#071a30;
+  font-weight:bold;
+
+  border:2px solid #1a1a1a;
+  border-radius:6px;
+  text-decoration:none;
+
+  box-shadow:
+    inset 1px 1px 0 rgba(255,255,255,.35),
+    inset -1px -1px 0 rgba(0,0,0,.35);
+  font-family: var(--font-ui);
+}
+
+.big-button:hover{ filter:brightness(1.03); }
+
+/* 9) Posts */
+.post{
+  padding: 10px 0;
+}
+
+.post h2{
+  margin: 0 0 6px;
+  font-size: 18px;
+}
+
+.meta{
+  font-size:12px;
+  color:#3b3b3b;
+  margin-bottom:10px;
+  font-family: var(--font-ui);
+}
+
+/* Link style more “old web” */
+.link, a{
+  color:#0b3a6a;
+}
+
+.link{
+  font-weight:bold;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
+
+.link:hover{
+  color:#051f3a;
+  background: rgba(255,255,0,.18); /* classic hover highlight */
+}
+
+/* 10) Sidebar */
+.sidebar{
+  display:flex;
+  flex-direction:column;
+  gap:16px;
+}
+
+.widget .hd{ font-size: 14px; }
+
+/* 11) Support poster */
+.poster{
+  height: 210px;
+  border: 3px solid #0b2f57;
+  outline: 3px solid #ffdf00;
+  border-radius: 4px;
+  background: linear-gradient(180deg, #2d6fb3, #133a6b);
+  position: relative;
+  overflow:hidden;
+}
+
+.poster-title{
+  position:absolute;
+  top:10px;
+  left:10px;
+  right:10px;
+  font-size: 26px;
+  font-weight: bold;
+  color:#eaffff;
+  text-shadow: 0 2px 0 rgba(0,0,0,.65);
+  font-family: var(--font-ui);
+}
+
+.poster-moon{
+  position:absolute;
+  left:0; right:0;
+  top:0; bottom:0;
+  background:
+    radial-gradient(120px 120px at 50% 65%, rgba(255,255,255,.75), rgba(255,255,255,0) 60%),
+    radial-gradient(900px 240px at 50% 110%, rgba(0,0,0,.35), rgba(0,0,0,0) 70%);
+  opacity:.9;
+}
+
+.poster-sub{
+  position:absolute;
+  bottom:12px;
+  left:12px;
+  color:#eaffff;
+  font-weight:bold;
+  text-shadow: 0 2px 0 rgba(0,0,0,.65);
+  font-family: var(--font-ui);
+}
+
+/* 12) Marquee + visitor counter */
+.marquee-wrap{
+  border:2px solid #222;
+  background:#ededed;
+  padding:6px;
+  border-radius:6px;
+  margin-bottom:12px;
+
+  box-shadow:
+    inset 1px 1px 0 rgba(255,255,255,.55),
+    inset -1px -1px 0 rgba(0,0,0,.35);
+}
+
+.counter{
+  border:2px solid #1a1a1a;
+  background: #0f1b0f;
+  padding:10px;
+  border-radius:6px;
+
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:12px;
+
+  box-shadow:
+    inset 1px 1px 0 rgba(255,255,255,.10),
+    inset -1px -1px 0 rgba(0,0,0,.60);
+}
+
+.counter-label{
+  color:#9cff9c;
+  font-weight:bold;
+  font-size:12px;
+  font-family: var(--font-ui);
+}
+
+.digits{
+  font-family: var(--font-body);
+  color:#39ff39;
+  background:#071007;
+  border:1px solid rgba(255,255,255,.08);
+  padding:6px 10px;
+  border-radius:4px;
+  letter-spacing:2px;
+}
+
+/* 13) Badges / pills */
+.badges{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+}
+
+.pill{
+  border:2px solid #222;
+  background:#efefef;
+  padding:4px 8px;
+  border-radius:999px;
+  font-size:12px;
+  font-family: var(--font-ui);
+
+  box-shadow:
+    inset 1px 1px 0 rgba(255,255,255,.55),
+    inset -1px -1px 0 rgba(0,0,0,.25);
+}
+
+/* Optional: gif styling */
+.gif{
+  width: 100%;
+  max-width: 240px;
+  display:block;
+  border-radius:6px;
+  background: transparent !important;
+
+}
+
+/* 14) Footer */
+.footer{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+
+  padding:10px 14px;
+  background:#0c0c12;
+  color:#cfcfcf;
+  border-top:2px solid #000;
+  font-size:12px;
+
+  font-family: var(--font-ui);
+}
+.bg-gif{
+  position: fixed;
+  right: 12px;
+  bottom: 12px;
+
+  width: 96px;       /* adjust size if needed */
+  height: auto;
+
+  image-rendering: pixelated;
+  z-index: 1;        /* behind frame, above background */
+  pointer-events: none;
+}
+.footer-right{ opacity:.85; }
+
+/* 15) Responsive */
+@media (max-width: 980px){
+  .content{ grid-template-columns: 1fr; }
+  .nav{ flex-wrap: wrap; }
+}
+/* ===== Retro blinking text ===== */
+@keyframes retroBlink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+
+.blink{
+  animation: retroBlink 0.85s steps(1, end) infinite;
+}
+
+/* Softer blink (less annoying) */
+@keyframes softBlink {
+  0%, 70% { opacity: 1; }
+  71%, 100% { opacity: .25; }
+}
+.blink-soft{
+  animation: softBlink 1.25s steps(1, end) infinite;
+}
+
+/* ===== HORROR BLINK / FLICKER TEXT ===== */
+@keyframes horrorFlicker {
+  0%   { opacity: 1;   text-shadow: 0 0 0 rgba(0,0,0,0); }
+  3%   { opacity: .2;  text-shadow: 0 0 8px rgba(255,255,255,.2); }
+  6%   { opacity: 1; }
+  7%   { opacity: .05; }
+  9%   { opacity: 1; }
+  14%  { opacity: .4; }
+  16%  { opacity: 1; }
+  22%  { opacity: .12; }
+  24%  { opacity: 1; }
+  35%  { opacity: .65; }
+  36%  { opacity: .1; }
+  38%  { opacity: 1; }
+  60%  { opacity: .85; }
+  62%  { opacity: .2; }
+  64%  { opacity: 1; }
+  100% { opacity: 1; }
+}
+
+@keyframes creepJitter {
+  0%   { transform: translate(0,0); }
+  10%  { transform: translate(1px,0); }
+  20%  { transform: translate(-1px,1px); }
+  30%  { transform: translate(0,-1px); }
+  40%  { transform: translate(1px,1px); }
+  50%  { transform: translate(-1px,0); }
+  60%  { transform: translate(0,1px); }
+  70%  { transform: translate(1px,-1px); }
+  80%  { transform: translate(-1px,-1px); }
+  90%  { transform: translate(0,0); }
+  100% { transform: translate(0,0); }
+}
+
+.horror-text{
+  animation:
+    horrorFlicker 2.2s steps(1,end) infinite,
+    creepJitter 0.35s steps(2,end) infinite;
+  letter-spacing: .4px;
+}
+
+/* A “possessed” look for the address */
+.horror-address{
+  animation:
+    horrorFlicker 3.1s steps(1,end) infinite,
+    creepJitter 0.25s steps(2,end) infinite;
+  filter: contrast(1.2);
+}
+
+/* ===== HORROR CARD ANIMATION ===== */
+@keyframes horrorFloat {
+  0%   { transform: translate(0,0) rotate(0deg) scale(1); }
+  12%  { transform: translate(1px,-2px) rotate(-0.2deg) scale(1.003); }
+  24%  { transform: translate(-2px,1px) rotate(0.35deg) scale(1.002); }
+  36%  { transform: translate(2px,2px) rotate(-0.15deg) scale(1.004); }
+  52%  { transform: translate(-1px,2px) rotate(0.25deg) scale(1.002); }
+  68%  { transform: translate(1px,-1px) rotate(-0.35deg) scale(1.003); }
+  100% { transform: translate(0,0) rotate(0deg) scale(1); }
+}
+
+/* Sudden “glitch jerk” moments */
+@keyframes horrorJerk {
+  0%, 80%, 100% { transform: translate(0,0); }
+  81% { transform: translate(3px,-2px); }
+  82% { transform: translate(-4px,3px); }
+  83% { transform: translate(2px,2px); }
+  84% { transform: translate(0,0); }
+}
+
+/* Sickly color pulses */
+@keyframes horrorColor {
+  0%   { filter: saturate(1.1) contrast(1.05) hue-rotate(0deg) brightness(1); }
+  40%  { filter: saturate(1.6) contrast(1.2) hue-rotate(18deg) brightness(0.95); }
+  70%  { filter: saturate(0.9) contrast(1.35) hue-rotate(-14deg) brightness(0.9); }
+  100% { filter: saturate(1.1) contrast(1.05) hue-rotate(0deg) brightness(1); }
+}
+/* =========================
+   CRT Poster Theme (Green)
+   ========================= */
+
+/* Replace the blue “Support me” card look */
+.poster.crt{
+  position: relative;
+  overflow: hidden;
+
+  /* kill the old blue gradient */
+  background: radial-gradient(140% 120% at 50% 55%, #0b1a10 0%, #020604 55%, #000 100%) !important;
+
+  border: 2px solid #06130b;
+  outline: 2px solid rgba(120,255,170,.25);
+  border-radius: 8px;
+
+  /* slight glow + depth */
+  box-shadow:
+    0 18px 40px rgba(0,0,0,.55),
+    inset 0 0 24px rgba(40,255,140,.12),
+    inset 0 0 2px rgba(255,255,255,.10);
+
+  /* subtle “bulge” illusion */
+  transform: perspective(900px) rotateX(0.6deg);
+}
+
+/* Make the text CRT-ish */
+.poster.crt .poster-title{
+  color: #b8ffd2;
+  text-shadow:
+    0 0 6px rgba(40,255,140,.25),
+    0 0 18px rgba(40,255,140,.12);
+  font-family: var(--font-body); /* your Courier/Lucida Console */
+  font-weight: 700;
+  letter-spacing: .3px;
+}
+
+/* CRT scanlines overlay */
+.poster.crt::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+
+  background:
+    repeating-linear-gradient(
+      to bottom,
+      rgba(255,255,255,.06) 0px,
+      rgba(255,255,255,.06) 1px,
+      rgba(0,0,0,0) 3px,
+      rgba(0,0,0,0) 5px
+    );
+
+  opacity: .35;
+  mix-blend-mode: overlay;
+}
+
+/* Scanline sweep (moving bright bar) */
+@keyframes crtSweep {
+  0%   { transform: translateY(-120%); opacity: 0; }
+  10%  { opacity: .22; }
+  60%  { opacity: .10; }
+  100% { transform: translateY(140%); opacity: 0; }
+}
+.poster.crt .poster-title{
+  position: relative;
+  z-index: 2;
+
+  color: #b8ffd2;
+  font-family: var(--font-body);
+  font-weight: 700;
+  letter-spacing: .3px;
+
+  text-shadow:
+    0 0 6px rgba(40,255,140,.25),
+    0 0 18px rgba(40,255,140,.12);
+}
+
+.poster.crt::after{
+  content:"";
+  position:absolute;
+  left:-10%;
+  right:-10%;
+  top:0;
+  height: 70px;
+
+  background: linear-gradient(
+    180deg,
+    rgba(0,0,0,0),
+    rgba(140,255,200,.18),
+    rgba(0,0,0,0)
+  );
+  opacity: .85;
+  mix-blend-mode: screen;
+  animation: crtSweep 2.8s linear infinite;
+  pointer-events:none;
+}
+
+/* Slight “curved screen” vignette */
+.poster.crt .poster-moon{
+  /* reuse your existing div but change it to vignette */
+  background:
+    radial-gradient(closest-side at 50% 45%, rgba(0,0,0,0) 55%, rgba(0,0,0,.55) 100%),
+    radial-gradient(110% 80% at 50% 115%, rgba(0,0,0,.35), rgba(0,0,0,0) 70%);
+  opacity: 1;
+}
+
+/* Optional: horror flicker for the whole card */
+@keyframes crtFlicker {
+  0%, 100% { opacity: 1; filter: contrast(1.05) brightness(1); }
+  6% { opacity: .85; filter: contrast(1.25) brightness(.95); }
+  7% { opacity: 1; }
+  18% { opacity: .92; }
+  19% { opacity: 1; }
+  58% { opacity: .88; }
+  59% { opacity: 1; }
+}
+.poster.crt.flicker{
+  animation: crtFlicker 2.9s steps(1,end) infinite;
+}
+
+.bd,
+.bd p,
+.bd li,
+.bd ul,
+.post,
+.post p,
+.intro{
+  font-weight: 700;
+}
+
+/*Here we are customizing the hex dump of the image*/
+/* =========================
+   CRT green hex/ASCII box
+   ========================= */
+.crt-dump{
+  position: relative;
+  margin: 14px 0;
+  padding: 14px 16px;
+
+  /* the box */
+  border: 2px solid #0c2b12;
+  border-radius: 8px;
+  background: radial-gradient(120% 120% at 50% 20%, #0b1a0f 0%, #050b07 55%, #020402 100%);
+  box-shadow:
+    inset 0 0 0 1px rgba(140,255,140,.18),
+    inset 0 0 35px rgba(57,255,57,.10),
+    0 10px 25px rgba(0,0,0,.35);
+
+  /* keep the art intact */
+  white-space: pre;
+  overflow: auto;          /* scroll inside box if too wide */
+  max-width: 100%;
+}
+
+.crt-dump code{
+  display:block;
+  font-family: "Lucida Console","Courier New",monospace;
+  font-size: 13px;
+  line-height: 1.35;
+  color: #7CFF7C;
+
+  /* glow */
+  text-shadow:
+    0 0 6px rgba(57,255,57,.35),
+    0 0 14px rgba(57,255,57,.15);
+}
+
+/* scanlines overlay (does NOT block selection) */
+/* ===== CRT bulge / curvature illusion ===== */
+.crt-dump{
+  position: relative;
+
+  /* bulge illusion */
+  transform: perspective(900px) scale(1.01);
+  filter: saturate(1.05) contrast(1.05);
+
+  /* curved screen lighting */
+  background:
+    radial-gradient(
+      120% 90% at 50% 45%,
+      rgba(120,255,120,.12),
+      rgba(0,0,0,.0) 45%
+    ),
+    radial-gradient(
+      100% 100% at 50% 50%,
+      #0b1a0f 0%,
+      #050b07 55%,
+      #020402 100%
+    );
+
+  box-shadow:
+    inset 0 0 18px rgba(57,255,57,.18),
+    inset 0 0 55px rgba(0,0,0,.85),
+    0 12px 28px rgba(0,0,0,.45);
+}
+
+
+/* Edge vignette (CRT glass feel) */
+.crt-dump::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  border-radius:8px;
+  background:
+    radial-gradient(
+      110% 90% at 50% 50%,
+      rgba(0,0,0,0) 60%,
+      rgba(0,0,0,.55) 100%
+    );
+}
+.gif-center{
+  text-align: center;
+  margin-top: 12px;
+}
+
+.gif-center img{
+  display: inline-block;
+}
+
+
+

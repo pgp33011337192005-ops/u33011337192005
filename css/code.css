@@ -1,0 +1,126 @@
+/* =========================================================
+   SIMPLE RETRO MARKDOWN + CODE STYLING
+   ALL TEXT IN COURIER NEW
+   ========================================================= */
+
+/* Force Courier New everywhere inside markdown posts */
+.markdown-body,
+.markdown-body *{
+  font-family: "Courier New", Courier, monospace !important;
+  font-weight: 700;
+  line-height: 1.55;
+  color: #1b1b1b;
+}
+
+/* Headings (same font, just larger) */
+.markdown-body h1{
+  font-size: 34px;
+  margin: 14px 0 12px;
+  font-weight: 900;
+}
+.markdown-body h2{
+  font-size: 22px;
+  margin: 18px 0 10px;
+  font-weight: 900;
+}
+.markdown-body h3{
+  font-size: 18px;
+  margin: 18px 0 10px;
+  font-weight: 900;
+}
+
+/* Paragraph spacing */
+.markdown-body p{
+  margin: 10px 0;
+}
+
+/* Lists */
+.markdown-body ul,
+.markdown-body ol{
+  margin: 8px 0 8px 18px;
+}
+
+/* =========================
+   INLINE CODE
+   ========================= */
+
+.markdown-body :not(pre) > code{
+  font-family: "Courier New", Courier, monospace;
+  font-weight: 700;
+  font-size: .95em;
+
+  background: rgba(0,0,0,.10);
+  border: 1px solid rgba(0,0,0,.35);
+  padding: 2px 7px;
+  border-radius: 4px;
+
+  box-shadow:
+    inset 1px 1px 0 rgba(255,255,255,.45),
+    inset -1px -1px 0 rgba(0,0,0,.25);
+
+  color: #0b2f57;
+}
+
+/* =========================
+   CODE BLOCKS (SIMPLE RETRO BOX)
+   ========================= */
+
+.markdown-body pre{
+  margin: 14px 0 18px;
+  padding: 0;
+  background: transparent;
+  border: none;
+  overflow-x: auto;
+  max-width: 100%;
+}
+
+.markdown-body pre code{
+  display: block;
+  padding: 12px 14px;
+
+  background: #0c0f14;
+  color: #e8f0ff;
+
+  border: 2px solid #1a1a1a;
+  border-radius: 6px;
+
+  box-shadow:
+    inset 1px 1px 0 rgba(255,255,255,.08),
+    inset -1px -1px 0 rgba(0,0,0,.55);
+
+  font-family: "Courier New", Courier, monospace;
+  font-size: 13px;
+  line-height: 1.5;
+  font-weight: 700;
+
+  white-space: pre;
+}
+
+/* =========================
+   HIGHLIGHT.JS COLORS (SUBTLE)
+   ========================= */
+
+.hljs{
+  background: transparent;
+  color: inherit;
+}
+
+.hljs-keyword,
+.hljs-built_in,
+.hljs-type{
+  color: #7fbfff;
+}
+
+.hljs-string{
+  color: #9fe89f;
+}
+
+.hljs-number,
+.hljs-literal{
+  color: #ffd37a;
+}
+
+.hljs-comment{
+  color: rgba(232,240,255,.45);
+  font-style: italic;
+}

@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>About • My Retro Blog</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body>
+  <div class="frame">
+    <header class="banner">
+      <div class="badge">Just Everywhere...</div>
+    </header>
+
+    <nav class="nav">
+      <a class="nav-item" href="index.html">
+        <img class="nav-ico" src="static/icons/home.ico" alt="" /> Home
+      </a>
+      <a class="nav-item" href="about.html">
+        <img class="nav-ico" src="static/icons/about.ico" alt="" /> About
+      </a>
+      <a class="nav-item" href="blog.html">
+        <img class="nav-ico" src="static/icons/blog.ico" alt="" /> Blog
+      </a>
+      <div class="nav-spacer"></div>
+      <button class="tiny-btn" id="toggleMusicBtn" type="button">Toggle Music</button>
+    </nav>
+
+    <main class="content">
+      <section class="box">
+        <div class="hd">
+          <span class="title">about me</span>
+          <span class="tagline">— quick intro</span>
+        </div>
+
+        <div class="bd">
+          <p class="intro">
+            Hi! I’m <b>33011337192005</b>(yeah the initial 3301 is just the inspiration from 3301 puzzle). This blog is my little corner of the internet where
+            I publish my own thoughts, my own ideas but believe my I am `weird`
+          </p>
+          <hr class="sep" />
+
+          <h3><u>Contact</u></h3>
+          <p>
+            Email: <a class="link" href="mailto:pg33011337192005@gmail.com">pgp33011337192005@gmail.com</a><br />
+            GitHub: <a class="link" href="#">pgp33011337192005-ops</a><br />
+            Twitter/X: <a class="link" href="#">u@33011337192005</a>
+          </p>
+        </div>
+      </section>
+
+      <aside class="sidebar">
+        <section class="box widget">
+          <div class="hd">@whoami</div>
+          <div class="bd small">
+            <img class="gif" src="static/gifs/whoami.gif" alt="glitch gif">
+            <p class="dim"><b>Vibing in liminal core...</b></p>
+          </div>
+        </section>
+
+        <section class="box widget">
+          <div class="hd">(p-1)(q-1)</div>
+          <div class="bd small">
+            <div class="marquee-wrap">
+              <marquee behavior="scroll" direction="left">
+                <b>Do you believe information should be free?</b>
+              </marquee>
+            </div>
+            <div class="counter">
+              <div class="counter-label">VISITORS:</div>
+              <div class="digits" id="visitorDigits">000000</div>
+            </div>
+          </div>
+        </section>
+      </aside>
+    </main>
+
+    <footer class="footer">
+      <span>© <span id="year"></span> My Retro Blog</span>
+      <span class="footer-right">Made with pure HTML/CSS/JS</span>
+    </footer>
+  </div>
+
+  <audio id="bgMusic" loop>
+    <source src="/static/audio/hello-world.mp3" type="audio/mpeg" />
+  </audio>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
