@@ -74,10 +74,10 @@ async function initPostPage() {
   }
 
   try {
-    const posts = await loadJSON("/static/posts.json");
+    const posts = await loadJSON("static/posts.json");
     const meta = posts.find(x => x.slug === slug) || null;
 
-    const md = await loadText(`/static/posts/${slug}.md`);
+    const md = await loadText(`static/posts/${slug}.md`);
     bodyEl.innerHTML = window.marked ? marked.parse(md) : `<pre>${md}</pre>`;
 
     if (meta) {
