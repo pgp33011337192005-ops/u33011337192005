@@ -35,7 +35,7 @@ async function initBlogList() {
   if (!listEl) return;
 
   try {
-    const posts = await loadJSON("static/posts.json");
+    const posts = await loadJSON("../static/posts.json");
 
     if (!Array.isArray(posts) || posts.length === 0) {
       listEl.innerHTML = "<p><b>No posts found.</b> Add items to <code>static/posts.json</code>.</p>";
