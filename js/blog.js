@@ -1,4 +1,6 @@
-// ---- marked + highlight.js setup ----
+// -----------------------------
+// marked + highlight.js setup
+// -----------------------------
 if (window.marked) {
   marked.setOptions({
     gfm: true,
@@ -13,14 +15,17 @@ if (window.marked) {
   });
 }
 
+// -----------------------------
+// helpers
+// -----------------------------
 async function loadJSON(path) {
-  const res = await fetch(path);
+  const res = await fetch(path, { cache: "no-cache" });
   if (!res.ok) throw new Error(`${path} -> HTTP ${res.status}`);
   return await res.json();
 }
 
 async function loadText(path) {
-  const res = await fetch(path);
+  const res = await fetch(path, { cache: "no-cache" });
   if (!res.ok) throw new Error(`${path} -> HTTP ${res.status}`);
   return await res.text();
 }
@@ -29,25 +34,38 @@ function getQueryParam(name) {
   return new URL(window.location.href).searchParams.get(name);
 }
 
-// ---- BLOG LIST: blog.html ----
+// IMPORTANT:
+// Your files are at:
+//   /static/posts.json
+//   /static/posts/<slug>.md
+// And blog.html + post.html are in the same folder as /static
+const POSTS_INDEX = "static/posts.json";
+const POSTS_DIR   = "static/posts";
+
+// -----------------------------
+// BLOG LIST: blog.html
+// -----------------------------
 async function initBlogList() {
   const listEl = document.getElementById("blogList");
   if (!listEl) return;
 
   try {
-    const posts = await loadJSON("../static/posts.json");
+    const posts = await loadJSON(POSTS_INDEX);
 
     if (!Array.isArray(posts) || posts.length === 0) {
-      listEl.innerHTML = "<p><b>No posts found.</b> Add items to <code>static/posts.json</code>.</p>";
+      listEl.innerHTML =
+        `<p><b>No posts found.</b> Add items to <code>${POSTS_INDEX}</code>.</p>`;
       return;
     }
 
     listEl.innerHTML = posts.map(p => `
       <article class="post">
         <h2>
-          <a class="link" href="post.html?p=${encodeURIComponent(p.slug)}">${p.title}</a>
+          <a class="link" href="post.html?p=${encodeURIComponent(p.slug)}">
+            ${p.title}
+          </a>
         </h2>
-        <div class="meta">${p.date || ""} • Category: ${p.category || ""}</div>
+        <div class="meta">${p.date || ""}${p.category ? ` • Category: ${p.category}` : ""}</div>
         <p>${p.excerpt || ""}</p>
       </article>
     `).join("");
@@ -57,12 +75,14 @@ async function initBlogList() {
     listEl.innerHTML = `
       <p><b>Could not load posts.</b></p>
       <p>Reason: <code>${String(err.message).replaceAll("<","&lt;")}</code></p>
-      <p class="dim">Check: server running? file path correct? valid JSON?</p>
+      <p class="dim">Check: file exists? path correct? valid JSON?</p>
     `;
   }
 }
 
-// ---- POST PAGE: post.html ----
+// -----------------------------
+// POST PAGE: post.html
+// -----------------------------
 async function initPostPage() {
   const bodyEl = document.getElementById("postBody");
   if (!bodyEl) return;
@@ -74,32 +94,44 @@ async function initPostPage() {
   }
 
   try {
-    const posts = await loadJSON("../static/posts.json");
-    const meta = posts.find(x => x.slug === slug) || null;
+    // Load metadata list
+    const posts = await loadJSON(POSTS_INDEX);
+    const meta = Array.isArray(posts) ? posts.find(x => x.slug === slug) : null;
 
-    const md = await loadText(`../static/posts/${slug}.md`);
+    // Load markdown file
+    const md = await loadText(`${POSTS_DIR}/${slug}.md`);
+
+    // Render markdown
     bodyEl.innerHTML = window.marked ? marked.parse(md) : `<pre>${md}</pre>`;
 
+    // Set title/meta if available
     if (meta) {
       const titleEl = document.getElementById("postTitle");
-      const metaEl = document.getElementById("postMeta");
-      if (titleEl) titleEl.textContent = meta.title;
-      if (metaEl) metaEl.textContent = `${meta.date || ""} • ${meta.category || ""}`;
-      document.title = `${meta.title} • My Retro Blog`;
+      const metaEl  = document.getElementById("postMeta");
+
+      if (titleEl) titleEl.textContent = meta.title || slug;
+      if (metaEl) metaEl.textContent = `${meta.date || ""}${meta.category ? ` • ${meta.category}` : ""}`;
+
+      document.title = `${meta.title || slug} • My Retro Blog`;
     }
 
+    // Highlight code blocks
     if (window.hljs) {
       document.querySelectorAll("pre code").forEach(b => hljs.highlightElement(b));
     }
+
   } catch (err) {
     console.error(err);
     bodyEl.innerHTML = `
       <p><b>Could not load this post.</b></p>
       <p>Reason: <code>${String(err.message).replaceAll("<","&lt;")}</code></p>
+      <p class="dim">Check: file exists in <code>${POSTS_DIR}/</code> and slug matches.</p>
     `;
   }
 }
 
-// run
+// -----------------------------
+// run both (safe: each exits if elements not found)
+// -----------------------------
 initBlogList();
 initPostPage();
