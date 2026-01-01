@@ -35,7 +35,7 @@ async function initBlogList() {
   if (!listEl) return;
 
   try {
-    const posts = await loadJSON("../static/posts.json");
+    const posts = await loadJSON("/static/posts.json");
 
     if (!Array.isArray(posts) || posts.length === 0) {
       listEl.innerHTML = "<p><b>No posts found.</b> Add items to <code>static/posts.json</code>.</p>";
@@ -74,10 +74,10 @@ async function initPostPage() {
   }
 
   try {
-    const posts = await loadJSON("../static/posts.json");
+    const posts = await loadJSON("/static/posts.json");
     const meta = posts.find(x => x.slug === slug) || null;
 
-    const md = await loadText(`../static/posts/${slug}.md`);
+    const md = await loadText(`/static/posts/${slug}.md`);
     bodyEl.innerHTML = window.marked ? marked.parse(md) : `<pre>${md}</pre>`;
 
     if (meta) {
